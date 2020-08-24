@@ -17,3 +17,5 @@
 
 - Place the .osr in `replay/` with the corresponding.osu
 - Run `python main.py` in a command line prompt
+
+Warning: If the beatmap contains special characters, it will not work atm. Remove all special characters from the .osu file.
