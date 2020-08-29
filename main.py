@@ -274,4 +274,38 @@ for kp in keypress:
         deviances.append([kp[0],difference])
         columns[kp[1]].pop(0)
 
+gaps = [list(),list(),list(),list(),list()]
+last = [-1,-1,-1,-1]
+lastt = -1
+
+i = 0
+while(i<len(keypress)):
+    kp = keypress[i]
+    t = kp[0]
+    col = kp[1]
+    
+    if(last[col] != -1):
+        diff = t - last[col]
+        gaps[col].append(diff)
+        gaps[4].append(t - lastt)
+
+    last[col] = t
+    lastt = t
+
+    i+=1
+
+with open("gaps.csv","w") as f:
+    f.write("1,2,3,4,T\n")
+
+    i = 0
+    while(i<len(gaps[4])):
+        for k in range(0,4):
+            f.write("\"")
+            if(i<len(gaps[k])):
+                f.write(str(gaps[k][i]))
+            f.write("\",")
+        f.write("\""+str(gaps[4][i])+"\"\n")
+
+        i+=1
+
 DrawDevianceGraph(replay, beatmap,deviances, od)
